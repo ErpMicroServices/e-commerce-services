@@ -1,0 +1,27 @@
+{
+  "name": "e-commerce-services",
+  "version": "0.0.0",
+  "description": "Services for ecommerce",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErpMicroServices/e-commerce-services.git"
+  },
+  "keywords": [
+    "e-commerce",
+    "erp",
+    "content"
+  ],
+  "author": "Jim Barrows",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ErpMicroServices/e-commerce-services/issues"
+  },
+  "homepage": "https://github.com/ErpMicroServices/e-commerce-services#readme",
+  "dependencies": {
+    "restify": "^4.3.0"
+  }
+}
