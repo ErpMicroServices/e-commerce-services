@@ -1,0 +1,32 @@
+version: '3'
+services:
+  ecommerce-db:
+    image: ecommerce-db
+    container_name: ecommerce-db
+    ports:
+      - 5432:5432
+
+  # pg-admin:
+  #   image: "thajeztah/pgadmin4"
+  #   container_name: pg-admin
+  #   ports:
+  #     - 5050:5050
+  #   links:
+  #     - ecommerce-db
+
+  e-commerce-user-api:
+    build: .
+    container_name: user-api
+    links:
+      - ecommerce-db
+
+  traefik:
+    image: traefik
+    container_name: traefik
+    command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /dev/null:/traefik.toml
