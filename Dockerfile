@@ -2,14 +2,12 @@ FROM node:7.5
 
 EXPOSE 80
 
-ENV NODE_ENV=production
-
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
 
-RUN npm install --global babel-watch babel-core
+RUN npm install --global nodemon babel-core babel-cli
 RUN npm install
 COPY . /usr/src/app
 
@@ -18,4 +16,4 @@ LABEL traefik.frontend.rule=Host:localhost;PathPrefixStrip:/api/user
 LABEL traefik.port=80
 LABEL traefik.frontend.entryPoints=http
 
-CMD [ "babel-watch", "index.js"]
+CMD [ "nodemon", "index.js", "--exec", "babel-node"]

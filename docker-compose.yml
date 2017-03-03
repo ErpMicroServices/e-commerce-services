@@ -15,10 +15,13 @@ services:
   #     - ecommerce-db
 
   e-commerce-user-api:
+    image: e-commerce-user-api
     build: .
     container_name: user-api
     links:
       - ecommerce-db
+    volumes:
+      - "./:/usr/src/app"
 
   traefik:
     image: traefik
