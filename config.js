@@ -13,8 +13,8 @@ class Config {
                     url: process.env.SERVER_URL || "http://localhost/api/user"
                 },
                 database: {
-                    host: process.env.DATABASE_HOST || 'erp-ecommerce-db',
-                    port: process.env.DATABASE_PORT || 5433,
+                    host: process.env.DATABASE_HOST || 'ecommerce-db',
+                    port: process.env.DATABASE_PORT || 5432,
                     database: process.env.DATABASE_DATABSE || 'ems_ecommerce',
                     user: process.env.DATABASE_USER || 'ems_ecommerce',
                     password: process.env.DATABASE_PASSWORD || 'ems_ecommerce'

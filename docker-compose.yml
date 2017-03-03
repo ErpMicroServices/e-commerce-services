@@ -6,13 +6,13 @@ services:
     ports:
       - 5432:5432
 
-  # pg-admin:
-  #   image: "thajeztah/pgadmin4"
-  #   container_name: pg-admin
-  #   ports:
-  #     - 5050:5050
-  #   links:
-  #     - ecommerce-db
+  pg-admin:
+    image: "thajeztah/pgadmin4"
+    container_name: pg-admin
+    ports:
+      - 5050:5050
+    links:
+      - ecommerce-db
 
   e-commerce-user-api:
     image: e-commerce-user-api
