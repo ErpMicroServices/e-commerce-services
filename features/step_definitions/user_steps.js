@@ -52,8 +52,7 @@ defineSupportCode(function({
         return fetch("http://localhost/api/user/authenticate", {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(this.user)
             })
@@ -63,7 +62,7 @@ defineSupportCode(function({
     });
 
     When('I logout', function() {
-        return fetch("http://localhost/api/user/authentication", {
+        return fetch("http://localhost/api/user/authenticate", {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,6 +75,7 @@ defineSupportCode(function({
     });
 
     Then('I will be logged in', function(callback) {
+      // console.log("This result: ", this.result);
         expect(this.result.error).to.not.be.ok;
         expect(this.result.data).to.be.ok;
         expect(this.result.data.status).to.be.equal(200);
@@ -85,7 +85,6 @@ defineSupportCode(function({
                 callback();
             })
             .catch((error) => callback(error));
-
     });
 
     Then('I will be given a message that says "The username is required"', function(callback) {

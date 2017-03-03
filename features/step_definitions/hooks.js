@@ -12,7 +12,6 @@ defineSupportCode(function({
 
     Before(function(result, callback) {
       // Promise.all([
-      console.log("Cleaning db");
       this.db.any("delete from user_login")
       // ])
       .then((data) => callback())
