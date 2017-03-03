@@ -12,23 +12,18 @@ server.version = config.server.version;
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
-console.log("db: ", db);
-
-
 server.post('/register', function(req, res) {
     let registration_info = {
         user_id: req.body.user_id,
         password: req.body.password
     };
-    let errors = user_login.validate(registration_info) || [];
-    if (errors && (errors.length > 0)) {
-        res.json(400, {
-            errors
-        });
+    let errors = user_login.validate(registration_info);
+
+    if (errors.length > 0) {
+        res.json(400, errors.map((err) => {return {path: err.path, message: err.message}}));
     } else {
       db.one("insert into user_login(user_id, password) values($1, $2) returning id", [registration_info.user_id, registration_info.password])
       .then( data => {
-        console.log("data: ", data);
         var token = jwt.sign({
           username: registration_info.user_id,
           _id: data.id
@@ -39,7 +34,13 @@ server.post('/register', function(req, res) {
       })
       .catch(error => {
         console.log("error: ", error);
-        res.json(400, error);
+        let errors = []
+        if( error.message.includes('user_login_user_id_key')) {
+          errors.push({path:'', message:"A user with the given username is already registered"})
+        } else {
+          errors.push({path:'', message: error.message});
+        }
+        res.json(400, errors);
       })
     }
 });

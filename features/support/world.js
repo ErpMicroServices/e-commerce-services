@@ -1,0 +1,29 @@
+// features/support/world.js
+import config from "./config";
+import database from "./database";
+
+var {
+    defineSupportCode
+} = require('cucumber');
+
+function CustomWorld() {
+
+  console.log("Creating custom world");
+  this.config = config;
+  this.db = database;
+  this.user = {
+      user_id: '',
+      password: ''
+  };
+
+  this.result = {
+      error: null,
+      data: null
+  };
+}
+
+defineSupportCode(function({
+  setWorldConstructor
+}) {
+  setWorldConstructor(CustomWorld)
+});
