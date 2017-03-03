@@ -43,6 +43,12 @@ export function authenticate_user(req, res) {
     }
 }
 
+export function del_authenticate_user(req, res) {
+    var authJwt = req.header('Authorization');
+    res.removeHeader('Authorization');
+    res.send(204);
+}
+
 export function register_user(req, res) {
     let registration_info = {
         user_id: req.body.user_id,

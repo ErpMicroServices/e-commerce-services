@@ -7,8 +7,6 @@ var {
 } = require('cucumber');
 
 function CustomWorld() {
-
-  console.log("Creating custom world");
   this.config = config;
   this.db = database;
   this.user = {
