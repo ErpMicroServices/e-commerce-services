@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "docker-compose up",
+    "build": "docker build --rm --tag erpmicroservices/e-commerce-services .",
     "test": "cucumber-js --compiler es6:babel-core/register  -r ./features ../e-commerce-features"
   },
   "repository": {
