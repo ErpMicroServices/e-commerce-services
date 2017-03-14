@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "docker-compose up",
-    "test": "cucumber-js --compiler es6:babel-core/register  -r ./features ../ecommerce-features"
+    "test": "cucumber-js --compiler es6:babel-core/register  -r ./features ../e-commerce-features"
   },
   "repository": {
     "type": "git",

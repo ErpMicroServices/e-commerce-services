@@ -1,7 +1,7 @@
 version: '3'
 services:
   ecommerce-db:
-    image: ecommerce-db
+    image: erpmicroservices/ecommerce-db
     container_name: ecommerce-db
     ports:
       - "5432:5432"
@@ -17,9 +17,9 @@ services:
       - DEBUG=false
 
   e-commerce-user-api:
-    image: e-commerce-user-api
+    image: erpmicroservices/e-commerce-user-services
     build: .
-    container_name: user-api
+    container_name: user-services
     links:
       - ecommerce-db
     volumes:
