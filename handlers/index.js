@@ -34,6 +34,7 @@ export function authenticate_user(req, res) {
             })
             .catch(error => {
                 let errors = [];
+                console.log("error: ", error);
                 errors.push({
                     path: '',
                     message: error.message

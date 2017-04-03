@@ -8,12 +8,12 @@ class Config {
             this._config = {
                 server: {
                     port: process.env.SERVER_PORT || 80,
-                    name:process.env.SERVER_NAME || "e-commerce-user-api",
+                    name:process.env.SERVER_NAME || "e-commerce-user-service",
                     version: process.env.SERVER_VERSION || "0.1.0",
-                    url: process.env.SERVER_URL || "http://localhost/api/user"
+                    url: process.env.SERVER_URL || "http://localhost/api/e-commerce/user"
                 },
                 database: {
-                    host: process.env.DATABASE_HOST || 'ecommerce-db',
+                    host: process.env.DATABASE_HOST || 'e-commerce-db',
                     port: process.env.DATABASE_PORT || 5432,
                     database: process.env.DATABASE_DATABSE || 'ems_ecommerce',
                     user: process.env.DATABASE_USER || 'ems_ecommerce',

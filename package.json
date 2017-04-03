@@ -4,9 +4,11 @@
   "description": "Services for ecommerce",
   "main": "index.js",
   "scripts": {
-    "start": "docker-compose up",
     "build": "docker build --rm --tag erpmicroservices/e-commerce-services .",
-    "test": "cucumber-js --compiler es6:babel-core/register  -r ./features ../e-commerce-features"
+    "db_admin": "docker run --detach --publish 5050:5050 --name e-commerce-user-service-pgadmin --network=ecommerceuserservices_default --link e-commerce-user-service-db:e-commerce-db thajeztah/pgadmin4",
+    "push": "docker push erpmicroservices/e-commerce-user-service",
+    "start": "docker-compose up",
+    "test": "cucumber-js --tags @user-service --compiler es6:babel-core/register  -r ./features ../e-commerce-features"
   },
   "repository": {
     "type": "git",

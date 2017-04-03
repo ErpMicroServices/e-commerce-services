@@ -1,33 +1,28 @@
 version: '3'
 services:
-  ecommerce-db:
-    image: erpmicroservices/ecommerce-db
-    container_name: ecommerce-db
+  e-commerce-db:
+    image: erpmicroservices/e-commerce-db
+    container_name: e-commerce-user-service-db
     ports:
       - "5432:5432"
 
-  pg-admin:
-    image: "thajeztah/pgadmin4"
-    container_name: pg-admin
-    ports:
-      - "5050:5050"
-    links:
-      - ecommerce-db
-    environment:
-      - DEBUG=false
-
-  e-commerce-user-api:
-    image: erpmicroservices/e-commerce-user-services
+  e-commerce-user-service:
+    image: erpmicroservices/e-commerce-user-service
     build: .
-    container_name: user-services
+    container_name: e-commerce-user-service
     links:
-      - ecommerce-db
+      - e-commerce-db
     volumes:
       - "./:/usr/src/app"
+    labels:
+      - "traefik.backend=e-commerce-user-service"
+      - "traefik.frontend.rule=PathPrefixStrip:/api/e-commerce/user"
+      - "traefik.port=80"
+      - "traefik.frontend.entryPoints=http"
 
   traefik:
     image: traefik
-    container_name: traefik
+    container_name: e-commerce-user-service-traefik
     command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
     ports:
       - "80:80"

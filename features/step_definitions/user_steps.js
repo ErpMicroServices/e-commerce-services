@@ -21,7 +21,7 @@ defineSupportCode(function({
     });
 
     Given('a user registered with username = {user_id:stringInDoubleQuotes}, password = {password:stringInDoubleQuotes}', function(user_id, password) {
-        return fetch("http://localhost/api/user/register", {
+        return fetch("http://localhost/api/e-commerce/user/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ defineSupportCode(function({
 
 
     When('I register', function() {
-        return fetch("http://localhost/api/user/register", {
+        return fetch("http://localhost/api/e-commerce/user/register", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ defineSupportCode(function({
     });
 
     When('I login', function() {
-        return fetch("http://localhost/api/user/authenticate", {
+        return fetch("http://localhost/api/e-commerce/user/authenticate", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ defineSupportCode(function({
     });
 
     When('I logout', function() {
-        return fetch("http://localhost/api/user/authenticate", {
+        return fetch("http://localhost/api/e-commerce/user/authenticate", {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

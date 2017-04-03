@@ -11,9 +11,4 @@ RUN npm install --global nodemon babel-core babel-cli
 RUN npm install
 COPY . /usr/src/app
 
-LABEL traefik.backend=e_commerce_user_api
-LABEL traefik.frontend.rule=Host:localhost;PathPrefixStrip:/api/user
-LABEL traefik.port=80
-LABEL traefik.frontend.entryPoints=http
-
 CMD [ "nodemon", "index.js", "--exec", "babel-node"]
