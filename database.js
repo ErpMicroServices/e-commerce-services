@@ -1,6 +1,7 @@
 var pgp = require('pg-promise')();
 import config from "./config";
 
-const database = pgp(config.database);
+const party_db      = pgp(config.party_db);
+const e_commerce_db = pgp(config.e_commerce_db);
 
-export default database;
+export {party_db, e_commerce_db};
