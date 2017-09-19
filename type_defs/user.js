@@ -1,6 +1,6 @@
 export default `
 type User {
-	username: String!,
+	user_id: String!,
 	id: String!,
 	token: String!
 }
