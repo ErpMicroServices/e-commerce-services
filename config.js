@@ -15,7 +15,7 @@ class Config {
 				},
 				graphql      : {
 					graphiql   : process.env.GRAPHIQL || true,
-					endpointURL: process.env.ENDPOINT_URL || '/api/walker_knocker/admin/graphql'
+					endpointURL: process.env.ENDPOINT_URL || '/api/e-commerce/user/graphql'
 				},
 				jwt          : {
 					secret: process.env.JWT_SECRET || "this is an incredible secret.  the best secret in the world",
