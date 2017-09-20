@@ -22,8 +22,6 @@ defineSupportCode(function ({
 	});
 
 	Given('a user registered with username = {stringInDoubleQuotes}, password = {stringInDoubleQuotes}', function (user_id, password) {
-		console.log("user_id: ", user_id);
-		console.log("password: ", password);
 		return this.db.one("insert into user_login (user_id, password) values ($1, $2) returning id", [user_id, password])
 				.then(data => this.user.id = data.id);
 	});
@@ -114,7 +112,7 @@ defineSupportCode(function ({
 		callback();
 	});
 
-	Then('I will be given a message that says "The username is required"', function (callback) {
+	Then('I will be given a message that says "User login id is required, and must be a valid email address"', function (callback) {
 		expect(this.result.error).to.be.null;
 		expect(this.result.data).to.not.be.null;
 		expect(this.result.data.register.path).to.be.equal("user_id");
@@ -131,7 +129,7 @@ defineSupportCode(function ({
 
 	});
 
-	Then('I will be given the message "You have already registered with that username"', function (callback) {
+	Then('I will be given the message "A user with the given username is already registered"', function (callback) {
 		expect(this.result.error).to.be.null;
 		expect(this.result.data).to.not.be.null;
 		expect(this.result.data.register.path).to.be.equal("user_id");
