@@ -31,7 +31,7 @@ export default function (obj, args, context, graphql) {
 				let errorResult = {};
 				if (error.message.includes('user_login_user_id_key')) {
 					errorResult = {
-						path   : '',
+						path   : 'user_id',
 						message: "A user with the given username is already registered"
 					};
 				} else {

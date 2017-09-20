@@ -22,7 +22,10 @@ defineSupportCode(function ({
 	});
 
 	Given('a user registered with username = {stringInDoubleQuotes}, password = {stringInDoubleQuotes}', function (user_id, password) {
-		return this.db.none("insert into user_login (user_id, password, party_id, web_address_id) values ($1,$2,$3,$4)", user_id, password, '74ae8eb0-7014-4423-a504-b7565fd20cb7', '9ab30466-b3ef-4cc6-aff9-a044f53bb9d2');
+		console.log("user_id: ", user_id);
+		console.log("password: ", password);
+		return this.db.one("insert into user_login (user_id, password) values ($1, $2) returning id", [user_id, password])
+				.then(data => this.user.id = data.id);
 	});
 
 
@@ -129,12 +132,10 @@ defineSupportCode(function ({
 	});
 
 	Then('I will be given the message "You have already registered with that username"', function (callback) {
-		expect(this.result.error).to.not.be.ok;
-		expect(this.result.data).to.be.ok;
-		expect(this.result.data).to.be.an.instanceof(Array);
-		expect(this.result.data.length).to.be.equal(1);
-		expect(this.result.data[0].path).to.be.equal("");
-		expect(this.result.data[0].message).to.be.equal("A user with the given username is already registered");
+		expect(this.result.error).to.be.null;
+		expect(this.result.data).to.not.be.null;
+		expect(this.result.data.register.path).to.be.equal("user_id");
+		expect(this.result.data.register.message).to.be.equal("A user with the given username is already registered");
 		callback();
 
 	});
