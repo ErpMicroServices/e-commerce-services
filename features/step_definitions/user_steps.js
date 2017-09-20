@@ -112,10 +112,9 @@ defineSupportCode(function ({
 	});
 
 	Then('I will be given a message that says "The username is required"', function (callback) {
-		expect(this.result.error).to.not.be.ok;
-		expect(this.result.data).to.be.ok;
-		expect(this.result.data).to.be.an.instanceof(Array);
-		expect(this.result.data.length).to.be.equal(1);
+		expect(this.result.error).to.be.null;
+		expect(this.result.data).to.not.be.null;
+		console.log("this.result.data: ", this.result.data);
 		expect(this.result.data.register.path).to.be.equal("user_id");
 		expect(this.result.data.register.message).to.be.equal("User login id is required, and must be a valid email address");
 		callback();
@@ -144,7 +143,6 @@ defineSupportCode(function ({
 	});
 
 	Then('I am logged out', function (callback) {
-		console.log("I am logged out: ", this.result);
 		expect(this.result.error).to.not.be.ok;
 		expect(this.result.data).to.be.ok;
 		callback();
