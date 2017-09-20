@@ -1,4 +1,5 @@
 // resolvers/index.js
+import {__resolveType} from 'graphql-tools';
 
 import authenticate from "./authenticate";
 import end_authentication from "./end_authentication";
@@ -9,7 +10,17 @@ export default {
 		authenticate,
 		end_authentication,
 		register
+
 	},
-	Query   : {}
+	Query   : {},
+	UserOrError: {
+		__resolveType(data, context, info) {
+			if (data.id) {
+				return "User";
+			} else {
+				return "Error";
+			}
+		}
+	}
 };
 

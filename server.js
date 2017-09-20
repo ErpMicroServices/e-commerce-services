@@ -18,8 +18,9 @@ app.use(bodyParser.json());
 app.use('/graphql', graphqlExpress({
 	schema,
 	context: {
-		party_db,
-		e_commerce_db
+		e_commerce_db,
+		jwt: config.jwt,
+		party_db
 	}
 }));
 
