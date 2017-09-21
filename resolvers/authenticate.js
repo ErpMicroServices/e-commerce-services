@@ -1,6 +1,8 @@
 import jwt from "jsonwebtoken";
 
 export default function (obj, args, context, graphql) {
+	let {user_id, password} = args;
+	console.log("args: ", args);
 	return context.e_commerce_db.one("select id, user_id, password from user_login where user_id = $1 and password=$2", [args.user_id, args.password])
 			.then(data => {
 				var token = jwt.sign({

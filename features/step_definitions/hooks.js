@@ -14,6 +14,10 @@ defineSupportCode(function ({
 			data : null,
 			error: null
 		};
+		this.user   = {
+			user_id : '',
+			password: ''
+		};
 		this.db.none("delete from user_login")
 				.then((data) => callback())
 				.catch((error) => callback(error));

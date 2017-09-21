@@ -21,6 +21,16 @@ defineSupportCode(function ({
 		callback();
 	});
 
+	Given('I have not provided a password', function (callback) {
+		this.user.password = ' ';
+		callback();
+	});
+
+	Given('I have not provided a username', function (callback) {
+		this.user.user_id = ' ';
+		callback();
+	});
+
 	Given('a user registered with username = {stringInDoubleQuotes}, password = {stringInDoubleQuotes}', function (user_id, password) {
 		return this.db.one("insert into user_login (user_id, password) values ($1, $2) returning id", [user_id, password])
 				.then(data => this.user.id = data.id);
@@ -76,7 +86,7 @@ defineSupportCode(function ({
 						password: this.user.password
 					}
 				})
-				.then(response => this.result.data = response)
+				.then(response => this.result.data = response.data)
 				.catch(error => this.result.error = error);
 	});
 
@@ -105,26 +115,23 @@ defineSupportCode(function ({
 		if (this.result.data.register) {
 			user = this.result.data.register;
 		} else {
-			user = this.result.data.data.authenticate;
+			user = this.result.data.authenticate;
 		}
 		expect(user.user_id, "register.user_id is ", user.user_id, " and should be ", this.user.user_id).to.be.equal(this.user.user_id);
 		expect(user.id, "id should not be null or nil").to.be.ok;
 		callback();
 	});
 
-	Then('I will be given a message that says "User login id is required, and must be a valid email address"', function (callback) {
+	Then('I will be given a message that says {stringInDoubleQuotes}', function (message, callback) {
 		expect(this.result.error).to.be.null;
 		expect(this.result.data).to.not.be.null;
-		expect(this.result.data.register.path).to.be.equal("user_id");
-		expect(this.result.data.register.message).to.be.equal("User login id is required, and must be a valid email address");
-		callback();
-	});
-
-	Then('I will be given a message that says "The password is required"', function (callback) {
-		expect(this.result.error).to.be.null;
-		expect(this.result.data).to.not.be.null;
-		expect(this.result.data.register.path).to.be.equal("password");
-		expect(this.result.data.register.message).to.be.equal("The password is required");
+		let result = {};
+		if (this.result.data.register) {
+			result = this.result.data.register;
+		} else {
+			result = this.result.data.authenticate;
+		}
+		expect(result.message).to.be.equal(message);
 		callback();
 
 	});
@@ -144,5 +151,15 @@ defineSupportCode(function ({
 		callback();
 	});
 
+	Then('I will get an error indicating a password must be provided', function (callback) {
+		expect(this.result.error).to.not.be.null;
+		expect(this.result.data).to.be.null;
+		callback();
+	});
 
+	Then('I will get an error indicating a username must be provided', function (callback) {
+		expect(this.result.error).to.not.be.null;
+		expect(this.result.data).to.be.null;
+		callback();
+	});
 });
