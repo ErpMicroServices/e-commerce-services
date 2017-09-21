@@ -1,24 +1,31 @@
-import restify from 'restify';
+import {graphiqlExpress, graphqlExpress} from 'apollo-server-express';
+import bodyParser from 'body-parser';
+import express from 'express';
+import {makeExecutableSchema} from 'graphql-tools';
+
+
 import config from "./config";
-import db from "./database";
-import {user_login} from './schema';
-import jwt from "jsonwebtoken";
-import {register_user, authenticate_user, del_authenticate_user} from "./handlers";
+import {e_commerce_db, party_db} from "./database";
+import resolvers from "./resolvers";
+import typeDefs from "./type_defs";
 
-var server = restify.createServer();
 
-server.name = config.server.name;
-server.version = config.server.version;
+const schema = makeExecutableSchema({typeDefs, resolvers});
 
-server.use(restify.requestLogger());
-server.use(restify.acceptParser(server.acceptable));
-server.use(restify.queryParser());
-server.use(restify.bodyParser());
+const app = express();
+app.use(bodyParser.json());
 
-server.post('/register', register_user);
-server.post('/authenticate', authenticate_user);
-server.del('/authenticate', del_authenticate_user);
+app.use('/graphql', graphqlExpress({
+	schema,
+	context: {
+		e_commerce_db,
+		jwt: config.jwt,
+		party_db
+	}
+}));
 
-server.listen(config.server.port, function() {
-    console.log('%s listening at %s', config.server.name, config.server.url);
-});
+if (config.graphql.graphiql) {
+	app.use("/graphiql", graphiqlExpress({endpointURL: config.graphql.endpointURL}));
+}
+
+app.listen(config.server.port, () => console.log('%s listening at %s', config.server.name, config.server.url));
