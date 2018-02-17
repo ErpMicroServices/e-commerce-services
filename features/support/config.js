@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs"
 
 class Config {
 
@@ -10,7 +10,7 @@ class Config {
                     port: process.env.SERVER_PORT || 80,
                     name:process.env.SERVER_NAME || "e-commerce-user-api",
                     version: process.env.SERVER_VERSION || "0.1.0",
-                    url: process.env.SERVER_URL || "http://localhost/api/user"
+                  url: process.env.SERVER_URL || "http://localhost/api/e-commerce/user/graphql"
                 },
                 database: {
                     host: process.env.DATABASE_HOST || 'localhost',
