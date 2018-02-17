@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken"
 
 export default function (obj, args, context, graphql) {
 	let {user_id, password} = args.newUser;

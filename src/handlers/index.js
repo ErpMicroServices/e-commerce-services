@@ -1,10 +1,7 @@
-import restify from 'restify';
-import config from "../config";
-import db from "../database";
-import {
-    user_login
-} from '../schema';
-import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken"
+import config from "../config"
+import db from "../database"
+import {user_login} from '../schema'
 
 export function authenticate_user(req, res) {
     let login = {

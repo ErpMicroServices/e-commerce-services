@@ -1,13 +1,13 @@
-import {graphiqlExpress, graphqlExpress} from 'apollo-server-express';
-import bodyParser from 'body-parser';
-import express from 'express';
-import {makeExecutableSchema} from 'graphql-tools';
+import {graphiqlExpress, graphqlExpress} from 'apollo-server-express'
+import bodyParser from 'body-parser'
+import express from 'express'
+import {makeExecutableSchema} from 'graphql-tools'
 
 
-import config from "./config";
-import {e_commerce_db, party_db} from "./database";
-import resolvers from "./resolvers";
-import typeDefs from "./type_defs";
+import config from "./config"
+import {e_commerce_db, party_db} from "./database"
+import resolvers from "./resolvers/index"
+import typeDefs from "./type_defs/index"
 
 
 const schema = makeExecutableSchema({typeDefs, resolvers});

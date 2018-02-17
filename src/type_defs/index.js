@@ -1,9 +1,9 @@
-import Error from "./error";
-import NewUser from "./new_user";
-import Result from "./result";
-import User from "./user";
-import AuthenticateResponse from "./user_or_error";
-import UserOrError from "./user_or_error";
+import Error from "./error"
+import NewUser from "./new_user"
+import Result from "./result"
+import User from "./user"
+import AuthenticateResponse from "./user_or_error"
+import UserOrError from "./user_or_error"
 
 
 const Query = `

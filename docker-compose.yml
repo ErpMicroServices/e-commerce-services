@@ -13,7 +13,9 @@ services:
     links:
       - e-commerce-db
     volumes:
-      - "./:/usr/src/app"
+      - "./src/:/usr/src/app/"
+      - "./.babelrc:/usr/src/app/.babelrc"
+      - "./node_modules/:/usr/src/app/node_modules"
     labels:
       - "traefik.backend=e-commerce-user-service"
       - "traefik.frontend.rule=PathPrefixStrip:/api/e-commerce/user"
